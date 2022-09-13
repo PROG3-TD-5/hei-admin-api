@@ -32,8 +32,12 @@ public class EventController {
   }
   @PutMapping
   public List<Event> saveAllEvent(
-          @RequestBody List<Event> eventList
+          @RequestParam int page,
+          @RequestParam int pageSize,
+          @RequestBody List<school.hei.haapi.endpoint.rest.model.Event> eventList
   ){
-    return eventService.updateEvent(eventList);
+    eventService.saveAllEvent(eventMapper.toDomainList(eventList));
+    return eventService.getAll(page, pageSize);
   }
+
 }

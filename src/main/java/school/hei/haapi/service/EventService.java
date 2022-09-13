@@ -27,7 +27,7 @@ public class EventService {
     return eventRepository.findAll(pageable).toList();
   }
   @Transactional
-  public List<Event> updateEvent(List<Event> eventList) {
-    return eventRepository.saveAll(eventList);
+  public void saveAllEvent(List<Event> eventList){
+    eventRepository.saveAll(eventList);
   }
 }
