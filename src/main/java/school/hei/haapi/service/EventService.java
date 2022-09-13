@@ -21,4 +21,8 @@ public class EventService {
     Pageable pageable = PageRequest.of(page,pageSize, Sort.by(ASC , "startTime"));
     return eventRepository.findAll(pageable).toList();
   }
+
+  public void saveAllEvent(List<Event> eventList){
+    eventRepository.saveAll(eventList);
+  }
 }

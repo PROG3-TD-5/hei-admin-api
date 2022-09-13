@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import school.hei.haapi.endpoint.rest.mapper.EventMapper;
 import school.hei.haapi.model.Event;
 import school.hei.haapi.service.EventService;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Controller
@@ -37,6 +35,7 @@ public class EventController {
           @RequestParam int pageSize,
           @RequestBody List<school.hei.haapi.endpoint.rest.model.Event> eventList
   ){
+    eventService.saveAllEvent(eventMapper.toDomainList(eventList));
     return eventService.getAll(page, pageSize);
   }
 }
