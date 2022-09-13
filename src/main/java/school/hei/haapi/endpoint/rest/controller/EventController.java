@@ -2,18 +2,12 @@ package school.hei.haapi.endpoint.rest.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import school.hei.haapi.endpoint.rest.mapper.EventMapper;
 import school.hei.haapi.model.Event;
 import school.hei.haapi.service.EventService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @Controller
@@ -24,6 +18,11 @@ public class EventController {
   private final EventService eventService;
   private final EventMapper eventMapper;
 
+  @GetMapping("/{id}")
+  public Event findEventById (
+          @PathVariable String id) {
+    return eventService.getEventById(id);
+  }
   @GetMapping
   public List<Event> getAllEvent(
           @RequestParam int page,
@@ -31,12 +30,10 @@ public class EventController {
   ){
     return eventService.getAll(page, pageSize);
   }
-  @PostMapping
+  @PutMapping
   public List<Event> saveAllEvent(
-          @RequestParam int page,
-          @RequestParam int pageSize,
-          @RequestBody List<school.hei.haapi.endpoint.rest.model.Event> eventList
+          @RequestBody List<Event> eventList
   ){
-    return eventService.getAll(page, pageSize);
+    return eventService.updateEvent(eventList);
   }
 }
