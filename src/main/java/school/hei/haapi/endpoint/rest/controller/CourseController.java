@@ -4,6 +4,7 @@ package school.hei.haapi.endpoint.rest.controller;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +24,7 @@ import static java.util.stream.Collectors.toUnmodifiableList;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/courses")
+@CrossOrigin("http://localhost:3000")
 @Data
 public class CourseController {
   private final CourseService courseService;

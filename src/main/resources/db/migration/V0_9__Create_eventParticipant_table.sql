@@ -20,5 +20,6 @@ create table if not exists "eventParticipant"
             constraint eventParticipant_id_event_fk references "event"(id)
 );
 
-create index if not exists eventParticipant_id_participant_fk on "eventParticipant" (id_participant);
-create index if not exists eventParticipant_id_event_fk on "eventParticipant" (id_event);
+create index if not exists eventParticipant_id_participant_index on "eventParticipant" (id_participant);
+create index if not exists eventParticipant_id_event_index on "eventParticipant" (id_event);
+

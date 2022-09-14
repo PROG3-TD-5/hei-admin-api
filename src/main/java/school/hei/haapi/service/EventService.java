@@ -20,13 +20,12 @@ import static org.springframework.data.domain.Sort.Direction.ASC;
 @AllArgsConstructor
 public class EventService {
   private final EventRepository eventRepository;
-  
+
   public Event getEventById(String id) { return eventRepository.getById(id);}
   public List<Event> getAll(int page , int pageSize){
     Pageable pageable = PageRequest.of(page,pageSize, Sort.by(ASC , "startTime"));
     return eventRepository.findAll(pageable).toList();
   }
-  @Transactional
   public void saveAllEvent(List<Event> eventList){
     eventRepository.saveAll(eventList);
   }
