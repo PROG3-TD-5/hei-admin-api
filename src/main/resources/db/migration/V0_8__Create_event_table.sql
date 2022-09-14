@@ -7,8 +7,8 @@ create table if not exists "event"
     event_type              varchar                  not null,
     start_time               varchar                  not null,
     end_time               varchar                  not null,
-    place_id               varchar                  not null
-    constraint event_place_id_fk references "place"(id)
+    id_place               varchar                  not null
+    constraint event_id_place_fk references "place"(id)
 );
 
-create index if not exists event_place_id_index on "event" (place_id);
+create index if not exists event_id_place_index on "event" (id_place);

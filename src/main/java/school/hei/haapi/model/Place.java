@@ -28,6 +28,6 @@ public class Place implements Serializable {
   private String id;
   @NotBlank
   @NotEmpty
-  @Column (name = "place_name" , nullable = false)
+  @Column (name = "salle" , nullable = false)
   private String placeName;
 }

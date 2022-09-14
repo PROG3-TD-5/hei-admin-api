@@ -15,7 +15,7 @@ create table if not exists "eventParticipant"
     id_participant           varchar                  not null
         constraint eventParticipant_id_participant_fk references "user"(id),
     id_event           varchar                  not null
-            constraint eventParticipant_id_event_fk references "event"(id),
+            constraint eventParticipant_id_event_fk references "event"(id)
 );
 
 create index if not exists eventParticipant_id_participant_index on "eventParticipant" (id_participant);

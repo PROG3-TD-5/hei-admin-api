@@ -102,7 +102,9 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
             .antMatchers(GET , "/courses/**").authenticated()
             .antMatchers(PUT , "/courses/**").hasRole(MANAGER.getRole())
         .antMatchers(PUT, "/groups/**").hasAnyRole(MANAGER.getRole())
-        .antMatchers("/**").denyAll()
+            .antMatchers(GET , "/events/**").authenticated()
+            .antMatchers(PUT, "/events/**").hasRole(MANAGER.getRole())
+            .antMatchers("/**").denyAll()
 
         // disable superfluous protections
         // Eg if all clients are non-browser then no csrf
