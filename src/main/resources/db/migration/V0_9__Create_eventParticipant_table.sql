@@ -7,6 +7,8 @@ $$
     end
 $$;
 
+create extension if not exists "uuid-ossp";
+
 create table if not exists "eventParticipant"
 (
     idEventParticipant                varchar
@@ -15,8 +17,8 @@ create table if not exists "eventParticipant"
     id_participant           varchar                  not null
         constraint eventParticipant_id_participant_fk references "user"(id),
     id_event           varchar                  not null
-            constraint eventParticipant_id_event_fk references "event"(id),
+            constraint eventParticipant_id_event_fk references "event"(id)
 );
 
-create index if not exists eventParticipant_user_id_index on "eventParticipant" (id_participant);
-create index if not exists eventParticipant_event_id_index on "eventParticipant" (id_event);
+create index if not exists eventParticipant_id_participant_fk on "eventParticipant" (id_participant);
+create index if not exists eventParticipant_id_event_fk on "eventParticipant" (id_event);

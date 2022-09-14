@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import school.hei.haapi.model.Course;
 import school.hei.haapi.repository.CourseRepository;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
