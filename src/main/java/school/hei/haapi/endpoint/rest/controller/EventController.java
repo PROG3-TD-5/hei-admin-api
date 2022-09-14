@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @Controller
 @AllArgsConstructor
-@RequestMapping("/event")
+@RequestMapping("/events")
 public class EventController {
 
   private final EventService eventService;
@@ -27,15 +27,15 @@ public class EventController {
   @GetMapping
   public List<Event> getAllEvent(
           @RequestParam int page,
-          @RequestParam int pageSize
+          @RequestParam int page_size
   ){
-    return eventService.getAll(page, pageSize);
+    return eventService.getAll(page, page_size);
   }
   @PutMapping
   public List<Event> saveAllEvent(
           @RequestParam int page,
           @RequestParam int pageSize,
-          @RequestBody List<school.hei.haapi.endpoint.rest.model.Event> eventList
+          @RequestBody List<school.hei.haapi.endpoint.rest.model.CreateEvent> eventList
   ){
     eventService.saveAllEvent(eventMapper.toDomainList(eventList));
     return eventService.getAll(page, pageSize);
