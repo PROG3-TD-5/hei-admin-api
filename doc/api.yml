@@ -476,6 +476,7 @@ paths:
       tags:
         - Event
       summary: Get all events order by starting_hours
+      description: Update students when `id` are provided, create them otherwise.
       parameters:
         - name: page
           in: query
@@ -518,7 +519,7 @@ paths:
             schema:
               type: array
               items:
-                $ref: '#/components/schemas/Event'
+                $ref: '#/components/schemas/CreateEvent'
       responses:
         '200':
           description: The created or updated events
@@ -527,7 +528,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Event'
+                  $ref: '#/components/schemas/CreateEvent'
         '400':
           $ref: '#/components/responses/400'
         '403':
@@ -1357,9 +1358,8 @@ components:
         endTime :
           type : string
           format : time
-        place :
-          type : object
-          $ref : '#/components/schemas/Place'
+        idPlace :
+          type : string
     EventParticipant:
       type : object
       properties :

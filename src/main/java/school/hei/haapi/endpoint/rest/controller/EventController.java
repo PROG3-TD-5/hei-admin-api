@@ -35,7 +35,7 @@ public class EventController {
   public List<Event> saveAllEvent(
           @RequestParam int page,
           @RequestParam int pageSize,
-          @RequestBody List<school.hei.haapi.endpoint.rest.model.Event> eventList
+          @RequestBody List<school.hei.haapi.endpoint.rest.model.CreateEvent> eventList
   ){
     eventService.saveAllEvent(eventMapper.toDomainList(eventList));
     return eventService.getAll(page, pageSize);
