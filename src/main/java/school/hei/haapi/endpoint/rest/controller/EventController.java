@@ -2,7 +2,6 @@ package school.hei.haapi.endpoint.rest.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import school.hei.haapi.endpoint.rest.mapper.EventMapper;
 import school.hei.haapi.model.Event;
 import school.hei.haapi.service.EventService;
+
 import java.util.List;
 
 @RestController
 @Controller
 @AllArgsConstructor
 @RequestMapping("/event")
-@CrossOrigin("http://localhost:3000")
 public class EventController {
 
   private final EventService eventService;
@@ -31,7 +30,7 @@ public class EventController {
   ){
     return eventService.getAll(page, pageSize);
   }
-  @PostMapping
+  @PutMapping
   public List<Event> saveAllEvent(
           @RequestParam int page,
           @RequestParam int pageSize,
@@ -40,4 +39,5 @@ public class EventController {
     eventService.saveAllEvent(eventMapper.toDomainList(eventList));
     return eventService.getAll(page, pageSize);
   }
+
 }

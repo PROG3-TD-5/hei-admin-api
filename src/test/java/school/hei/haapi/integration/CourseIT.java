@@ -32,7 +32,7 @@ import static school.hei.haapi.integration.conf.TestUtils.setUpCognito;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Testcontainers
-@ContextConfiguration(initializers = FeeIT.ContextInitializer.class)
+@ContextConfiguration(initializers = CourseIT.ContextInitializer.class)
 @AutoConfigureMockMvc
 public class CourseIT {
   @MockBean
@@ -50,7 +50,7 @@ public class CourseIT {
   }
 
   private static ApiClient anApiClient(String token) {
-    return TestUtils.anApiClient(token, FeeIT.ContextInitializer.SERVER_PORT);
+    return TestUtils.anApiClient(token, CourseIT.ContextInitializer.SERVER_PORT);
   }
   @BeforeEach
   void setUp() {

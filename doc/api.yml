@@ -352,7 +352,7 @@ paths:
         '429':
           $ref: '#/components/responses/429'
         '500':
-          $ref: '#/components/responses/500'  
+          $ref: '#/components/responses/500'
   
   '/places/{id}':
     get:
@@ -618,45 +618,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-    post:
-      tags:
-        - Event
-      summary: Create new event event_participants
-      parameters:
-        - name: event_id
-          in: path
-          required: true
-          schema:
-            type: string
-      operationId: createEventEventParticipants
-      requestBody:
-        description: Event event participants to create
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: '#/components/schemas/Event'
-      responses:
-        '200':
-          description: Created Event event participants
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventParticipant'
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'
+
     put:
       tags:
         - Event
@@ -697,51 +659,7 @@ paths:
           $ref: '#/components/responses/429'
         '500':
           $ref: '#/components/responses/500'
-  /event_participants:
-    get:
-      tags:
-        - Event
-      summary: Get all event event_participants filtered by status
-      parameters:
-        - name: status
-          in: query
-          description: "See the event_participants object for its value."
-          schema:
-            type: string
-            default: EXPECTED
-            enum:
-              - EXPECTED
-              - HERE
-              - MISSING
-        - name: page
-          in: query
-          schema:
-            $ref: '#/components/schemas/Page'
-        - name: page_size
-          in: query
-          schema:
-            $ref: '#/components/schemas/PageSize'
-      operationId: getEventParticipants
-      responses:
-        '200':
-          description: List of filtered event event_participants
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/EventParticipant'
-        '400':
-          $ref: '#/components/responses/400'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '429':
-          $ref: '#/components/responses/429'
-        '500':
-          $ref: '#/components/responses/500'  
-  
+
   '/teachers/{id}':
     get:
       tags:
