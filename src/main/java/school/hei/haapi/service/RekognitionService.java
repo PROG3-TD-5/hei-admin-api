@@ -16,29 +16,25 @@ import java.nio.ByteBuffer;
 import com.amazonaws.util.IOUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import school.hei.haapi.model.EventParticipant;
 
 @Service
 @AllArgsConstructor
 public class RekognitionService {
-
   private final EventParticipantService eventParticipantService;
-  List<EventParticipant> eventParticipantList = eventParticipantService.getAll(0,100);
 
-  public String comparedFace(String sourceImage , byte[] toCompare) throws Exception {
+  public String comparedFace(String targetImage , byte[] toCompare) throws Exception {
+
     Float similarityThreshold = 90F;
-    sourceImage = sourceImage;
-    String targetImage = sourceImage;
+    byte[] ref = targetImage.getBytes();
     ByteBuffer sourceImageBytes = ByteBuffer.wrap(toCompare);
-    ByteBuffer targetImageBytes = ByteBuffer.wrap(toCompare);
+    ByteBuffer targetImageBytes = ByteBuffer.wrap(ref);
 
     AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.defaultClient();
 
-    //Load source and target images and create input parameters
-    try (InputStream inputStream = new FileInputStream(new File(sourceImage))) {
+    try (InputStream inputStream = new FileInputStream(new File(targetImage))) {
       sourceImageBytes = ByteBuffer.wrap(IOUtils.toByteArray(inputStream));
     } catch (Exception e) {
-      System.out.println("Failed to load source image " + sourceImage);
+      System.out.println("Failed to load source image " + targetImage);
       System.exit(1);
     }
     try (InputStream inputStream = new FileInputStream(new File(targetImage))) {
@@ -58,11 +54,8 @@ public class RekognitionService {
             .withTargetImage(target)
             .withSimilarityThreshold(similarityThreshold);
 
-    // Call operation
     CompareFacesResult compareFacesResult = rekognitionClient.compareFaces(request);
 
-
-    // Display results
     List<CompareFacesMatch> faceDetails = compareFacesResult.getFaceMatches();
     for (CompareFacesMatch match : faceDetails) {
       ComparedFace face = match.getFace();
