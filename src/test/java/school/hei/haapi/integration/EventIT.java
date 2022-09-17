@@ -14,6 +14,7 @@ import school.hei.haapi.endpoint.rest.client.ApiClient;
 import school.hei.haapi.endpoint.rest.client.ApiException;
 import school.hei.haapi.endpoint.rest.model.CreateEvent;
 import school.hei.haapi.endpoint.rest.model.Event;
+import school.hei.haapi.endpoint.rest.model.Place;
 import school.hei.haapi.endpoint.rest.security.cognito.CognitoComponent;
 import school.hei.haapi.integration.conf.AbstractContextInitializer;
 import school.hei.haapi.integration.conf.TestUtils;
@@ -22,8 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static school.hei.haapi.integration.conf.TestUtils.EVENT_ID;
-import static school.hei.haapi.integration.conf.TestUtils.ID_PLACE;
 import static school.hei.haapi.integration.conf.TestUtils.MANAGER1_TOKEN;
 import static school.hei.haapi.integration.conf.TestUtils.STUDENT1_TOKEN;
 import static school.hei.haapi.integration.conf.TestUtils.TEACHER1_TOKEN;
@@ -61,11 +60,10 @@ public class EventIT {
   }
   static Event event() {
     Event event = new Event();
-    event.id(EVENT_ID);
+    event.id("id_event");
     event.eventType("string");
     event.startTime("string");
     event.endTime("string");
-    event.idPlace(ID_PLACE);
     return event;
   }
 
@@ -75,7 +73,7 @@ public class EventIT {
     newEvent.eventType("string");
     newEvent.endTime("string");
     newEvent.startTime("string");
-    newEvent.idPlace(ID_PLACE);
+    newEvent.idPlace(event().getPlace().getId());
     return newEvent;
   }
 
@@ -86,14 +84,13 @@ public class EventIT {
     EventApi api = new EventApi(student1Client);
     Event event = new Event();
     event.setId(event().getId());
-    log.info(event().getId());
     event.setEventType(event().getEventType());
     event.setEndTime(event().getEndTime());
     event.setStartTime(event().getStartTime());
-    event.setIdPlace(ID_PLACE);
+    event.setPlace(new Place());
     List<Event> events = api.getEvents(1,100);
 
-    assertTrue(events.contains(event()));
+    assertTrue(events.contains(event));
   }
 
   @Test
@@ -124,7 +121,6 @@ public class EventIT {
     Event created3 = created;
     assertTrue(isValidUUID(created3.getId()));
     toCreate3.setId(created3.getId());
-    assertNotNull(created3.getIdPlace());
     toCreate3.setStartTime(created3.getStartTime());
     assertNotNull(created3.getEndTime());
     toCreate3.setEndTime(created3.getEndTime());

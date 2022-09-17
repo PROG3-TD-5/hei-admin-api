@@ -26,15 +26,4 @@ public class EventMapper {
   public List<Event> toDomainList(List<school.hei.haapi.endpoint.rest.model.CreateEvent> event){
     return event.stream().map(this::toRest).collect(Collectors.toUnmodifiableList());
   }
-
-  public Event toDomain(school.hei.haapi.endpoint.rest.model.Event event){
-    Place place = placeService.getPlaceById(event.getIdPlace());
-    return Event.builder()
-            .id(event.getId())
-            .place(place)
-            .eventType(event.getEventType())
-            .startTime(event.getStartTime())
-            .endTime(event.getEndTime())
-            .build();
-  }
 }

@@ -20,7 +20,6 @@ public class PlaceService {
     Pageable pageable = PageRequest.of(page, pageSize);
     return placeRepository.findAll(pageable).toList();
   }
-
   public Place getPlaceById(String id){
     return placeRepository.getById(id);
   }

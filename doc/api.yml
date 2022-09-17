@@ -1358,8 +1358,9 @@ components:
         endTime :
           type : string
           format : time
-        idPlace :
-          type : string
+        place:
+          type: object
+          $ref: '#/components/schemas/Place'
     EventParticipant:
       type : object
       properties :
